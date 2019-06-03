@@ -8,6 +8,7 @@ specification:
   admin_user:
     name: operations # YOUR-ADMIN-USERNAME
     key_path: /root/.ssh/epiphany-operations/id_rsa # YOUR-SSH-KEY-PATH
+  infrastructure_provisioner: terraform # valid values: terraform, none
   cloud:
     subscription_name: YOUR-SUB-NAME
     vnet_address_pool: 10.1.0.0/20

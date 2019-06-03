@@ -1,0 +1,6 @@
+kind: configuration/k3s-node
+version: 0.3.0
+title: "K3s Node Config"
+name: default
+specification:
+  version: 1.13.0

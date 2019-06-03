@@ -1,0 +1,6 @@
+kind: configuration/k3s-master
+version: 0.3.0
+title: "K3s Master Config"
+name: default
+specification:
+  version: 1.13.0

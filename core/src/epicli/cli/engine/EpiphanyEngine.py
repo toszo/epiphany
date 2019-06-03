@@ -97,13 +97,14 @@ class EpiphanyEngine:
 
             self.process_infrastructure_docs()
 
-            # Generate terraform templates
-            with TerraformTemplateGenerator(self.cluster_model, self.infrastructure_docs) as template_generator:
-                template_generator.run()
+            if self.cluster_model.specification.infrastructure_provisioner.lower() == 'terraform':
+                # Generate terraform templates
+                with TerraformTemplateGenerator(self.cluster_model, self.infrastructure_docs) as template_generator:
+                    template_generator.run()
 
-            # Run Terraform to create infrastructure
-            with TerraformRunner(self.cluster_model.specification.name) as tf_runner:
-                tf_runner.run()
+                # Run Terraform to create infrastructure
+                with TerraformRunner(self.cluster_model.specification.name) as tf_runner:
+                    tf_runner.run()
 
             self.process_configuration_docs()
 
