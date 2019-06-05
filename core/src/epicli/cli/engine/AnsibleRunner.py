@@ -40,18 +40,18 @@ class AnsibleRunner(Step):
 
         copy_files_recursively(src, get_ansible_path(self.cluster_model.specification.name))
 
-        # todo: install packages to run ansible on Red Hat hosts
-        self.ansible_command.run_task_with_retries(hosts="all", inventory=inventory_path, module="raw",
-                                                   args="sudo apt-get install -y python-simplejson", retries=5)
-
+        # # todo: install packages to run ansible on Red Hat hosts
+        # self.ansible_command.run_task_with_retries(hosts="all", inventory=inventory_path, module="raw",
+        #                                            args="sudo apt-get install -y python-simplejson", retries=5)
+        #
         self.ansible_vars_generator.run()
-
-        common_play_result = self.ansible_command.run_playbook_with_retries(inventory=inventory_path,
-                                                       playbook_path=os.path.join(
-                                                           get_ansible_path(self.cluster_model.specification.name),
-                                                           "common.yml"), retries=1)
-        if common_play_result != 0:
-            return
+        #
+        # common_play_result = self.ansible_command.run_playbook_with_retries(inventory=inventory_path,
+        #                                                playbook_path=os.path.join(
+        #                                                    get_ansible_path(self.cluster_model.specification.name),
+        #                                                    "common.yml"), retries=1)
+        # if common_play_result != 0:
+        #     return
 
         enabled_roles = self.inventory_creator.get_enabled_roles()
 

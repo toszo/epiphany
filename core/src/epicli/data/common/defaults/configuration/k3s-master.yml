@@ -3,4 +3,5 @@ version: 0.3.0
 title: "K3s Master Config"
 name: default
 specification:
-  version: 1.13.0
+  k3s_version: v0.5.0
+  systemd_dir: /etc/systemd/system

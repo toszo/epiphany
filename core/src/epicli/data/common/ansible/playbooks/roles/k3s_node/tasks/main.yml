@@ -1,0 +1,27 @@
+---
+# Most of Ansible taken from https://github.com/rancher/k3s/tree/master/contrib/ansible
+
+- name: Read node-token from master
+  slurp:
+    src: /var/lib/rancher/k3s/server/node-token
+  register: node_token
+  delegate_to: "{{ groups['k3s_master'][0] }}"
+
+- name: Store Master node-token
+  set_fact:
+   token: "{{ node_token.content | b64decode | regex_replace('\n', '') }}"
+
+- name: Copy K3s service file
+  template:
+    src: "k3s.service.j2"
+    dest: "{{ specification.systemd_dir }}/k3s.service"
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Enable and check K3s service
+  systemd:
+    name: k3s
+    daemon_reload: yes
+    state: restarted
+    enabled: yes
