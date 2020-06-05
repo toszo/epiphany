@@ -9,6 +9,8 @@ specification:
       enabled: yes
     - name: image-registry
       enabled: yes
+    - name: druid-single
+      enabled: yes
     - name: kubernetes-master
       enabled: yes
     - name: kubernetes-node
@@ -55,6 +57,7 @@ specification:
       enabled: yes
     - name: ignite
       enabled: yes
+
 
   roles_mapping:
     kafka:
@@ -140,4 +143,8 @@ specification:
       - node-exporter
       - filebeat
       - firewall
+    druid:
+      - druid-single
+      - filebeat
+      - node-exporter
 
